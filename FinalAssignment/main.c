@@ -3,8 +3,8 @@
 
 int menu();
 int getSize();
+void rotar (int mat[][]);
 int esgiro (int A[], int B[], int *tamgiro);
-void rotar (int N, int mat[N][N]);
 
 int main(void){
   int option, size;
@@ -12,8 +12,18 @@ int main(void){
     size = getSize();
     option = menu();
     if(option == 1){ // rotar function
+      int mat[size][size];
+
+      for(int i=0; i<size; i++){ // Loop the columns
+        for(int j=0; j<size; j++){ // Loop the rows
+          scanf("%d", &mat[i][j]);
+        }
+        fflush(stdin);
+      }
+      rotar(mat);
+
     }else if(option == 2){ // esgiro function
-      int tamgiro, number;
+      int tamgiro, result;
 
       int A[size], B[size];
 
@@ -22,20 +32,23 @@ int main(void){
       for(int i=0; i<size; i++){ // Loop the size of the arr
         scanf("%d", &A[i]); // Insert the element into the arr
       }
+      fflush(stdin);
 
       printf("\nEnter the second array: ");
-      fflush(stdin);
       for(int i=0; i<size; i++){
         scanf("%d", &B[i]); // Insert the element into the arr
       }
+      fflush(stdin);
 
-      esgiro(A, B, &tamgiro);
+      result = esgiro(A, B, &tamgiro);
+      printEsgiro(result, tamgiro); //This only prints the result, to clean the main function
     }
 
     printf("\nPulse una tecla para continuar...");
     getch();
   }while(option!=0);
 }
+
 
 int menu(){
   int option;
@@ -50,6 +63,8 @@ int menu(){
   return option;
 }
 
+
+// Helpers
 int getSize(){
   int size;
   printf("\nEnter the size of N: ");
@@ -60,6 +75,17 @@ int getSize(){
   return size;
 }
 
-/* int esgiro(int A[], int B[], int *tamgiro){ */
-/*   *tamgiro = 1; */
-/* } */
+
+// 'esgiro' functions
+int esgiro(int A[], int B[], int *tamgiro){
+  *tamgiro = 1;
+}
+
+int printEsgiro(int result, int tamgiro){
+  if(result == 0){
+    printf("\nIt is not a 'giro' of the array");
+  }
+  else{
+    printf("\nIt is a 'giro' of: %d elements", tamgiro);
+  }
+}
