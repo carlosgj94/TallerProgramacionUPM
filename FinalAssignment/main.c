@@ -1,6 +1,6 @@
 #include <stdio.h>
-// #include <conio.h> // Only available in windows
-#include <curses.h> // Only available in windows
+#include <conio.h> // Only available in windows
+// #include <curses.h> // Only available in windows
 // In linux compile it with: $ gcc -o main main.c -lcurses
 
 int menu();
@@ -115,7 +115,10 @@ int esgiro(int N, int A[N], int B[N], int *tamgiro){
   *tamgiro = N - i; //The size of the turn will be the length - the movement
   int j=0;
   while(j != N){
-    if(A[j] != B[i]) return 0;
+    if(A[j] != B[i]) {
+      *tamgiro = -1;
+      return 0;
+    }
 
     // Updating counters
     j++;
